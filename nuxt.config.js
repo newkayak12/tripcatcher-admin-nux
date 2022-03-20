@@ -1,14 +1,15 @@
 export default {
-  // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
-  ssr: false,
+  // disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
+  mode:'universial',
+  ssr: true,
   server:{
     port:9091,
     host:'0.0.0.0'
   },
-  // Global page headers: https://go.nuxtjs.dev/config-head
+  // global page headers: https://go.nuxtjs.dev/config-head
   head: {
     title: 'tripcatcher-admin',
-    htmlAttrs: {
+    htmlattrs: {
       lang: 'en'
     },
     meta: [
@@ -21,38 +22,54 @@ export default {
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
     ]
   },
-
-  // Global CSS: https://go.nuxtjs.dev/config-css
+  // global css: https://go.nuxtjs.dev/config-css
   css: [
   ],
-
-  // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
+  // plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
+    {src:'~/plugins/service.js', ssr:true},
+    {src:'~/plugins/plugins.js',  ssr:false}
   ],
 
-  // Auto import components: https://go.nuxtjs.dev/config-components
+  // auto import components: https://go.nuxtjs.dev/config-components
   components: true,
 
-  // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
-  buildModules: [
+  // modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
+  buildmodules: [
   ],
 
-  // Modules: https://go.nuxtjs.dev/config-modules
+  // modules: https://go.nuxtjs.dev/config-modules
   modules: [
     // https://go.nuxtjs.dev/bootstrap
     'bootstrap-vue/nuxt',
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
+    // vueToast
+    "vue-toastification/nuxt",
   ],
 
 
-  // Axios module configuration: https://go.nuxtjs.dev/config-axios
+  // axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
-    // Workaround to avoid enforcing hard-coded localhost:3000: https://github.com/nuxt-community/axios-module/issues/308
-    baseURL: '/',
+    // workaround to avoid enforcing hard-coded localhost:3000: https://github.com/nuxt-community/axios-module/issues/308
+    // baseurl: '/',
+    proxy:true,
+    init(axios, ctx){
+      axios.defaults.xsrfheadername = 'x-csrf-token'
+      axios.defaults.headers = {csrf:'jwt_admin_token'}
+    }
+  },
+  proxy:{
+    '/admin/':'http://192.168.0.15:9092',
+    '/api/':'http://192.168.0.15:9092'
   },
 
-  // Build Configuration: https://go.nuxtjs.dev/config-build
+  // build configuration: https://go.nuxtjs.dev/config-build
   build: {
+    vendor:[
+      '~/plugins/plugins.js',
+      '~/plugins/service.js'
+    ]
   }
+
 }
