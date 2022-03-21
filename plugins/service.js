@@ -1,9 +1,8 @@
 import ServiceExec from "/service/ServiceExec";
-import SignSvc from "/service/SignSvc";
-
+import AdminSignSvc from "/service/AdminSignSvc"
 
 export default ({store, $axios},inject)=>{
     const $ServiceExec = new ServiceExec($axios, store)
     inject('ServiceExec', $ServiceExec )
-    inject('SignSvc', new SignSvc($ServiceExec))
+    inject('AdminSignSvc', new AdminSignSvc($ServiceExec))
 }

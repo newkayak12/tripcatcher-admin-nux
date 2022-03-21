@@ -1,5 +1,5 @@
 const prefix = '/admin/sign'
-class SignSvc{
+class AdminSignSvc {
     constructor(ServiceExec) {
         this.axios = ServiceExec
     }
@@ -10,5 +10,11 @@ class SignSvc{
                 return response.data
             })
     }
+    signIn(params={}){
+        return this.axios.get(`${prefix}/signIn`, params)
+            .then(response=>{
+                return response.data
+            })
+    }
 }
-export default SignSvc
+export default AdminSignSvc
