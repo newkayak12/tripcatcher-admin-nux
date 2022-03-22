@@ -9,14 +9,14 @@
         <div class="card-body d-flex justify-content-center flex-column align-content-center">
           <div class="p-2">
             <p class="m-0 p-1">ID</p>
-            <input type="text" class="col-12 mt-2 rounded border p-1" v-model="form.userId">
+            <input type="text" class="col-12 mt-2 rounded border p-1" v-model="form.id" ref="id" @keyup.enter="$refs.password.focus()">
           </div>
           <div class="p-2">
             <p class="m-0 p-1">PASSWORD</p>
-            <input type="password" class="col-12 mt-2 rounded border p-1" v-model="form.userPassword">
+            <input type="password" class="col-12 mt-2 rounded border p-1" v-model="form.password" ref="password" @keyup.enter="$refs.signin.click()">
           </div>
           <div class="d-flex justify-content-end p-3 pr-2">
-            <button class="p-1 col-sm-12 col-xl-3 rounded btn-outline-success btn btn-success text-white" @click="signIn">로그인</button>
+            <button class="p-1 col-sm-12 col-xl-3 rounded btn-outline-success btn btn-success text-white" @click="signIn" ref="signin">로그인</button>
           </div>
         </div>
       </div>
@@ -28,6 +28,9 @@
 import {required} from 'vuelidate/lib/validators'
 export default {
   name: "index.vue",
+  mounted() {
+    this.$refs.id.focus()
+  },
   validations:{
     form:{
       userId:{
@@ -49,15 +52,20 @@ export default {
   },
   methods:{
     async getIp(){
-      const response = await this.$SignSvc.getIp()
+      const response = await this.$AdminSignSvc.getIp()
       return response
     },
     async signIn(){
       let parameter = this.$_.cloneDeep(this.form)
       parameter.ipAddress = await this.getIp();
+      console.log("param",parameter)
       const response = await this.$AdminSignSvc.signIn(parameter)
-      console.log(response)
-      this.$toast.error("hi", {timeout:1000})
+      if(response.code===200){
+
+        return
+      }
+
+      this.$toast.error(response.data, {timeout:1000})
     }
   }
 }

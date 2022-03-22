@@ -1,10 +1,12 @@
 class ServiceExec{
     constructor(axios, store) {
+        this.store = store;
         axios.interceptors.request.use(
             function (config){
                 config.headers.common.Authorization = store.getters['user/getToken']
                 return config
-            }
+            },
+
         )
         this.ServiceExec = axios
         this.$store = store
@@ -49,5 +51,6 @@ class ServiceExec{
             params:payload
         })
     }
+
 }
 export default ServiceExec

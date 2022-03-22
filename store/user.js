@@ -4,7 +4,6 @@ export const state = () => ({
      info:{},
      token:'',
      language:'',
-     ipAddress:''
  }
 })
 export const getters = {
@@ -13,7 +12,6 @@ export const getters = {
             info: state.userData.info||local.getItem("info"),
             token : state.userData.token||localStorage.getItem("token"),
             language: state.userData.language||localStorage.getItem("language"),
-            ipAddress: state.userData.ipAddress||localStorage.getItem("ipAddress")
         }
         return result
     },
@@ -30,6 +28,5 @@ export const mutations ={
         localStorage.setItem("info", payload._info)
         localStorage.setItem("token", payload._token)
         localStorage.setItem("language", payload._language)
-        localStorage.setItem("ipAddress", payload._ipAddress)
     }
 }
