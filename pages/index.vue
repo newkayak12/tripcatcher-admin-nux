@@ -1,10 +1,10 @@
 <template>
-  <div class="vw-100 vh-100 p-5 d-flex justify-content-around " style="background-color: #9665dc">
-    <div class="d-flex flex-column justify-content-center align-content-center col-md-5">
-      <h1 class="text-center text-white font-weight-bolder">TRIPCATCHER</h1>
-      <h4 class="text-center text-white">ADMIN</h4>
+  <div class="vw-100 vh-100 p-5 d-flex justify-content-around " style="background-color: #7c51a1">
+    <div class="d-flex flex-column justify-content-center align-content-center col-md-4">
+      <h1 class="text-center text-white font-weight-bolder font-Size-h1">TRIPCATCHER</h1>
+      <h4 class="text-center text-white font-Size-h4">ADMIN</h4>
     </div>
-    <div class="card-body d-flex flex-column justify-content-center align-content-center col-md-5 rounded">
+    <div class="card-body d-flex flex-column justify-content-center align-content-center col-md-4 rounded">
       <div class="card p-xl-3 p-sm-1">
         <div class="card-body d-flex justify-content-center flex-column align-content-center">
           <div class="p-2">
@@ -28,6 +28,7 @@
 import {required} from 'vuelidate/lib/validators'
 export default {
   name: "index.vue",
+  layout:'none',
   mounted() {
     this.$refs.id.focus()
   },
@@ -72,4 +73,10 @@ export default {
 </script>
 
 <style scoped>
+.font-Size-h1{
+  font-size: 5rem;
+}
+.font-Size-h4{
+  font-size: 2.5rem;
+}
 </style>

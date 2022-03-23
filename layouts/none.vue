@@ -1,12 +1,10 @@
 <template>
-  <div>
-
-  </div>
+  <Nuxt/>
 </template>
 
 <script>
 export default {
-  name: "Header"
+  name: "none"
 }
 </script>
 

@@ -1,7 +1,7 @@
 import ResponsePlugin from "@/service/ResponsePlugin";
 
 const prefix = '/admin/sign'
-class AdminSignSvc {
+class  AdminSignSvc {
     constructor(ServiceExec, responsePlugin) {
         this.axios = ServiceExec
         this.$r = responsePlugin
